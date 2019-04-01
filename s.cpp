@@ -1,11 +1,12 @@
 #include <iostream>
-
 #define SIZE 100
 
+template <typename T>
 class stack
 {
-  int stck[SIZE];
-  int tos;
+private:
+  T stck[SIZE];
+  unsigned capacity;
 public:
   stack();  // constructor
   ~stack(); // destructor
@@ -13,49 +14,52 @@ public:
   int pop();
 };
 
-stack::stack()
+template <typename T>
+stack<T>::stack()
 {
-  tos = 0;
+  capacity = 0;
   std::cout << "Stack Initialized\n";
 }
 
-
-stack::~stack()
+template <typename T>
+stack<T>::~stack()
 {
   std::cout << "Stack Destroyed\n";
 }
 
-void stack::push(int i)
+template <typename T>
+void stack<T>::push(int i)
 {
-  if(tos==SIZE)
+  if(capacity==SIZE)
   {
     std::cout << "Stack is full.\n";
     return;
   }
-  stck[tos] = i;
-  tos++;
+  stck[capacity] = i;
+  capacity++;
 }
 
-int stack::pop()
+template <typename T>
+stack<T>::pop()
 {
-  if(tos==0)
+  if(capacity==0)
   {
     std::cout << "Stack underflow.\n";
     return 0;
   }
-  tos--;
-  return stck[tos];
+  capacity--;
+  return stck[capacity];
 }
 
 
 int main()
 {
-  stack a, b;
-  a.push(1);
-  b.push(2);
+  stack<int> a, b;
+  a.push(12);
+  b.push(-2);
 
-  a.push(3);
-  b.push(4);
+  a.push(365);
+  b.push(455);
 
   std::cout << a.pop() << " ";
   std::cout << a.pop() << " ";
